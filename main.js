@@ -3,7 +3,7 @@
 // Copyright © 2024 by Aditya Dwi Nugroho
 // Github Account : https://github.com/AdityaDwiNugroho
 
-// Function to add the entered name to names.json on the server side
+// Still maintenance 
 function addNameToServer(name) {
   fetch('/addName', {
     method: 'POST',
@@ -89,7 +89,6 @@ function createMenu() {
       container.innerHTML = '';
       showGameModes(container);
       displayUserName(container, inputName); 
-      // Display user name after submitting
     });
 
     container.appendChild(nameForm);
@@ -98,12 +97,13 @@ function createMenu() {
   document.body.appendChild(container);
 }
 
-// Function to display the user's name
+// Function to display the username
 function displayUserName(container, userName) {
   let greeting = document.createElement('h1');
   greeting.textContent = `Welcome, ${userName}!`;
   greeting.style.fontFamily = 'Arial, sans-serif';
   greeting.style.color = '#333';
+  greeting.id = 'userNameGreeting'; 
   container.appendChild(greeting);
 }
 
@@ -113,6 +113,7 @@ function showGameModes(container) {
   title.textContent = "Select Mode:";
   title.style.fontFamily = 'Arial, sans-serif';
   title.style.color = '#333';
+  title.id = 'selectModeTitle';
   container.appendChild(title);
 
   let items = ['Calculator', 'Portfolio'];
@@ -148,8 +149,7 @@ function showGameModes(container) {
   });
 }
 
-
-// item selection 
+// Function to handle menu item selection
 function handleSelection(choice, menuItem) {
   document.querySelectorAll('.menu-item').forEach(item => {
     item.style.display = 'none';
@@ -161,6 +161,7 @@ function handleSelection(choice, menuItem) {
   loadingContainer.style.left = '50%';
   loadingContainer.style.transform = 'translate(-50%, -50%)';
   loadingContainer.style.textAlign = 'center';
+  loadingContainer.id = 'loadingContainer'; 
   document.body.appendChild(loadingContainer);
 
   let loadingBar = document.createElement('div');
@@ -170,6 +171,7 @@ function handleSelection(choice, menuItem) {
   loadingBar.style.marginBottom = '10px';
   loadingBar.style.borderRadius = '4px';
   loadingBar.style.transition = 'width 0.1s ease';
+  loadingBar.id = 'loadingBar'; 
   loadingContainer.appendChild(loadingBar);
 
   let loadingText = document.createElement('p');
@@ -177,7 +179,12 @@ function handleSelection(choice, menuItem) {
   loadingText.style.fontFamily = 'Arial, sans-serif';
   loadingText.style.color = '#333';
   loadingText.style.margin = '10px 0';
+  loadingText.id = 'loadingText'; 
   loadingContainer.appendChild(loadingText);
+
+  // Hide other elements while loading :)
+  document.getElementById('selectModeTitle').style.display = 'none';
+  document.getElementById('userNameGreeting').style.display = 'none';
 
   let percentage = 0;
   let loadingInterval = setInterval(() => {
@@ -192,7 +199,7 @@ function handleSelection(choice, menuItem) {
         switch (choice) {
           case 1:
             console.log("Redirecting to Calculator...");
-            window.location.href = 'src/calculator'; // Uncomment to redirect 
+            window.location.href = 'src/calculator'; // Uncomment to redirect
             break;
           case 2:
             console.log("Redirecting to Portfolio...");
@@ -209,6 +216,9 @@ function handleSelection(choice, menuItem) {
 
 // Initialize the application
 createMenu();
+
+
+
 
 
 
