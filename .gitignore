@@ -1,0 +1,7 @@
+node_modules/
+
+server.js
+test-api.js
+names.json
+src/api-Key
+src/img/
